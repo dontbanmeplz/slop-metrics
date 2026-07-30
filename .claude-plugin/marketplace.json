@@ -3,6 +3,7 @@
   "owner": {
     "name": "Chris Sawicz"
   },
+  "description": "Single-plugin marketplace for the slop-metrics agent skill.",
   "plugins": [
     {
       "name": "slop-metrics",
