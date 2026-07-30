@@ -3,6 +3,7 @@
 [![arXiv](https://img.shields.io/badge/arXiv-2603.24755-b31b1b.svg)](https://arxiv.org/abs/2603.24755)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-Claude%20Code%20%7C%20Kiro-blueviolet)](https://code.claude.com/docs/en/skills)
+[![Languages](https://img.shields.io/badge/scores-Python%20%7C%20JS%2FTS-3776AB)](#language-support)
 
 An agent skill that scores a codebase for "slop" using the two SlopCodeBench metrics —
 **structural erosion** (how much complexity is concentrated in already-complex functions) and
@@ -79,6 +80,22 @@ tree gives wrong numbers that look plausible. The wrapper fixes four things:
    `.gitignore`.
 4. **`--include-all`.** Required for baseline comparability, but ~97% of findings are `info`
    severity, so the wrapper prints the default-severity number alongside as a noise check.
+
+## Language support
+
+Each language is bucketed and scored separately, so mixed repos get one honest report per
+language instead of one blended wrong number.
+
+| Language | Extensions | Erosion | Verbosity |
+|---|---|---|---|
+| Python | `.py` | ✅ baseline-comparable | ✅ baseline-comparable (214 ast-grep rules + clones) |
+| JS / TS | `.js` `.jsx` `.ts` `.tsx` `.mjs` `.cjs` | ✅ baseline-comparable | ⚠️ clone detection only — all 214 rules are Python-only, so the score is reported but flagged NOT COMPARABLE |
+| everything else | — | not scored | not scored |
+
+Erosion is language-agnostic (cyclomatic complexity × function size), so its baselines apply to
+both buckets. `.d.ts` type declarations are skipped — they contain no callables and would only
+pad the denominator. Anything not listed (Go, Rust, Java, …) is silently outside scope for now;
+upstream `scb-check` would need rules and parsing for it first.
 
 ## Requirements
 
