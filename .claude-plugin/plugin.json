@@ -1,0 +1,16 @@
+{
+  "name": "slop-metrics",
+  "description": "Score a codebase for slop using the SlopCodeBench erosion and verbosity metrics, with published human and agent baselines to compare against.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Chris Sawicz"
+  },
+  "license": "MIT",
+  "keywords": [
+    "code-quality",
+    "metrics",
+    "complexity",
+    "refactoring",
+    "slopcodebench"
+  ]
+}

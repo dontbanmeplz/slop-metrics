@@ -1,0 +1,15 @@
+{
+  "name": "slop-metrics",
+  "owner": {
+    "name": "Chris Sawicz"
+  },
+  "plugins": [
+    {
+      "name": "slop-metrics",
+      "source": "./",
+      "description": "Score a codebase for slop: structural erosion and verbosity vs published human and agent baselines (SlopCodeBench, arXiv 2603.24755).",
+      "version": "1.0.0",
+      "license": "MIT"
+    }
+  ]
+}
