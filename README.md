@@ -51,7 +51,7 @@ and they land on their respective baselines to within measurement noise.
 
 ## How this came to be
 
-I ran across [a thread by @dexhorthy](https://x.com/dexhorthy/status/2081797628552270027) on
+I ran across [a thread by @dexhorthy](https://x.com/dexhorthy/status/2080734551912202354) on
 SlopCodeBench — Orlanski et al.'s benchmark showing that coding agents don't just fail tasks,
 they *degrade* codebases in ways a test suite never catches: structural erosion rose in 77% of
 agent trajectories and verbosity in 75.5%. The interesting part of the paper
