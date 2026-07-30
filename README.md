@@ -17,7 +17,8 @@ checkpoints, so a single score means something:
 | Human panel (473 OSS repos) | 0.19 ± 0.11 | 0.34 ± 0.22 |
 | Agent checkpoints | 0.44 ± 0.18 | 0.68 ± 0.20 |
 
-For example, `psf/requests` — famously well-maintained — lands right on the human mean:
+The baselines hold up remarkably well on repos the paper never saw. `psf/requests` — famously
+well-maintained, human-written — lands right on the human mean:
 
 ```
 $ python3 scripts/slop_check.py src
@@ -30,6 +31,22 @@ tree: 414f051
              ast-grep 488 loc + clones 136 loc = 594 flagged
              default-severity view: 0.059 (drops info-level findings; not baseline-comparable)
 ```
+
+And [OpenClaw](https://github.com/openclaw/openclaw) — ~1.2M LOC of famously largely
+agent-written TypeScript — lands *exactly* on the agent-checkpoint mean:
+
+```
+$ python3 slop_check.py src --exclude '*.test.ts' --exclude '*.spec.ts' ...
+tree: 7b581ecc
+
+=== js/ts ===
+  files 7542   loc 1213479   functions 67951   high-CC 5384
+  erosion    0.685   (human +1.6 SD, agent +0.0 SD)
+  verbosity  0.065   NOT COMPARABLE -- rules are Python-only, clone term alone
+```
+
+One codebase written by humans, one written mostly by agents, neither in the paper's corpus —
+and they land on their respective baselines to within measurement noise.
 
 ## How this came to be
 
