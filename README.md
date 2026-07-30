@@ -31,6 +31,22 @@ tree: 414f051
              default-severity view: 0.059 (drops info-level findings; not baseline-comparable)
 ```
 
+## How this came to be
+
+I ran across [a thread by @dexhorthy](https://x.com/dexhorthy/status/2081797628552270027) on
+SlopCodeBench — Orlanski et al.'s benchmark showing that coding agents don't just fail tasks,
+they *degrade* codebases in ways a test suite never catches: structural erosion rose in 77% of
+agent trajectories and verbosity in 75.5%. The interesting part of the paper
+([arXiv 2603.24755](https://arxiv.org/abs/2603.24755)) isn't the leaderboard — it's that the
+authors measured 473 real open-source repos and 2,869 agent checkpoints with the same two
+metrics, which turns them into a ruler. A score on *your* repo suddenly means something: you can
+say "this codebase is 1.7 SD more eroded than a typical human-maintained one" instead of vibes.
+
+So I turned the paper into a detector: this skill wraps the authors' own `scb-check` analyzer,
+fixes the sharp edges you hit when pointing it at a real project tree instead of a benchmark
+checkpoint (see below), and teaches the agent how to read the result against the published
+baselines — including when *not* to care.
+
 ## Why the wrapper exists
 
 It shells out to the authors' own `scb-check` CLI, but pointing that tool straight at a project
